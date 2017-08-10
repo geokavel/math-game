@@ -1,7 +1,6 @@
 import random
 import string
 import socket
-import io
 
 socket = socket.socket()
 socket.connect(("",7777))
