@@ -20,3 +20,12 @@ Bots
 ----
 
 Bots need to make a standard socket connection to port 7777 on localhost. Upon connecting, the first thing your bot should do is send a string containing its name followed by a new line to the server. From then on, your bot should listen for 6 space-separated numbers followed by a new line, meaning that a new round has started. Then your bot should send back its answer - a mathemtical expresion string followed by a new line. When your bot receives a message that says "quit" followed by a new line, it should know it's time to disconnect.
+
+Rules for Bots
+-----
+
+  1. Bots must be written in a language that is likely to be pre-installed on a Unix machine (or Swift). If you need a later version of such a language than what is on my computer, I'll try to get the latest version. If you have a language with a command line interpreter/compiler available that is a pretty small download, I may be able to add it.
+  2. Bots must be able to make a standard IPv4 socket connection to a server.
+  3. Bots can only use standard libraries available in their language (I can make some exceptions if a library is absolutely necessary and easy to add).
+  4. Bots can't interfere with other bots or the main program. Also, Java-based bots can't use this game's Eval class as part of their program. 
+
