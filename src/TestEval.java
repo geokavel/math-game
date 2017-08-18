@@ -96,7 +96,9 @@ public class TestEval {
 	int invalid = 0;
 	int testNo = 0;
 	Scanner tests = new Scanner(new File("testFile.txt"));
-	Scanner exps = new Scanner(new File(args[0]));
+	Scanner exps = new Scanner(new File("outputs/"+args[0]));
+	File output = new File("scores/"+args[0]+".out");
+	PrintWriter out = new PrintWriter(output);
 	while(tests.hasNextLine() && exps.hasNextLine()) {
 	    testNo++;
 	    int[] testDigits = new int[5];
@@ -120,7 +122,7 @@ public class TestEval {
                 result = eval(expression);
                 score = Math.abs(result - target);
 		totalScore += score;
-		System.out.println(score);
+		out.println(score);
 	    }
 	    catch(RuntimeException e) {
 		invalid++;
@@ -131,6 +133,12 @@ public class TestEval {
 	    
 	    
 	}
+
+	out.close();
+	if(invalid > 0) {
+	    output.delete();
+	}
+       
 	
     }
 }

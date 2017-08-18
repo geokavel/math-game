@@ -7,7 +7,7 @@ public class ScoreCompare {
     static int[] points = new int[]{15,12,10,9,8,7,6,5,4,3,2,1};
     public static void main(String[] args) throws Exception {
 	ArrayList<ProgramScore> programs = new ArrayList<ProgramScore>();
-	File folder = new File("../scores/");
+	File folder = new File("scores");
 	File[] files = folder.listFiles();
 	for(int i = 0;i<files.length;i++) {
 	    File f = files[i];
@@ -45,8 +45,8 @@ for(;round<tests;round++) {
 
      for(int i = 0;i<programs.size();i++) {
 	 programs.get(i).gameScore += roundPoints[i];
+	 System.out.println(programs.get(i).name + ": " +  roundPoints[i]);
      }	  
-     for(int p : roundPoints) System.out.println(p);
      System.out.println();
 	 
      }
