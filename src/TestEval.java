@@ -133,7 +133,7 @@ public class TestEval {
 	    
 	    
 	}
-
+        System.out.println("Tests Evaluated: " + testNo);
 	out.close();
 	if(invalid > 0) {
 	    output.delete();
