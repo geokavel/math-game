@@ -1,7 +1,11 @@
 import java.io.*;
 
 public class Eval {
-public static double eval(final String str) {
+    boolean degrees;
+    public Eval(boolean degrees) {
+        this.degrees = degrees;
+    }
+public double eval(final String str) {
     return new Object() {
         int pos = -1, ch;
 
@@ -39,6 +43,10 @@ public static double eval(final String str) {
                 else return x;
             }
         }
+        
+        double toRadians(double theta) {
+            return degrees ? Math.toRadians(theta) : theta;
+        }
 
         double parseTerm() {
             double x = parseFactor();
@@ -66,9 +74,9 @@ public static double eval(final String str) {
                 String func = str.substring(startPos, this.pos);
                 x = parseFactor();
                 if (func.equals("sqrt")) x = Math.sqrt(x);
-                else if (func.equals("sin")) x = Math.sin(Math.toRadians(x));
-                else if (func.equals("cos")) x = Math.cos(Math.toRadians(x));
-                else if (func.equals("tan")) x = Math.tan(Math.toRadians(x));
+                else if (func.equals("sin")) x = Math.sin(toRadians(x));
+                else if (func.equals("cos")) x = Math.cos(toRadians(x));
+                else if (func.equals("tan")) x = Math.tan(toRadians(x));
                 else throw new RuntimeException("Unknown function: " + func);
             } else {
                 throw new RuntimeException("Unexpected: " + (char)ch);
@@ -81,6 +89,8 @@ public static double eval(final String str) {
     }.parse();
 }
 public static void main(String[] args) throws IOException {
+    boolean degrees = args.length > 0 && args[0].equals("deg");
+    Eval me = new Eval(degrees);
 BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 String str;
     System.out.println();
@@ -88,7 +98,7 @@ String str;
     System.out.println();
 while(!(str = in.readLine()).equals("quit")) {
     try {
-	System.out.println(eval(str));
+	System.out.println(me.eval(str));
     }
     catch(RuntimeException e) {
         System.out.println(e.getMessage());
