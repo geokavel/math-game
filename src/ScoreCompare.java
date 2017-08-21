@@ -2,10 +2,11 @@ import java.io.*;
 import java.util.*;
 
 public class ScoreCompare {
-    final static int tests = 20;
+    static int tests;
     static int round = 0;
     static int[] points = new int[]{15,12,10,9,8,7,6,5,4,3,2,1};
     public static void main(String[] args) throws Exception {
+        tests = Integer.parseInt(args[0]);
 	ArrayList<ProgramScore> programs = new ArrayList<ProgramScore>();
 	File folder = new File("scores");
 	File[] files = folder.listFiles();
@@ -14,10 +15,10 @@ public class ScoreCompare {
 	    Scanner s = new Scanner(f);
 	    ProgramScore ps  = new ProgramScore(f.getName());
 	    programs.add(ps);
-	    while(s.hasNextDouble()) {
+	    while(s.hasNextDouble() && !ps.ready()) {
 		ps.add(s.nextDouble());
 	    }
-        if(!ps.ready()) { System.err.println(ps.name+ " has an improper number of test cases."); System.exit(-1);}
+        if(!ps.ready() || s.hasNextDouble()) { System.err.println(ps.name+ " has an improper number of test cases."); System.exit(-1);}
 	}
  points = Arrays.copyOf(points,programs.size()); 
 for(;round<tests;round++) {
