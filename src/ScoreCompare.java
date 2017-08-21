@@ -17,6 +17,7 @@ public class ScoreCompare {
 	    while(s.hasNextDouble()) {
 		ps.add(s.nextDouble());
 	    }
+        if(!ps.ready()) { System.err.println(ps.name+ " has an improper number of test cases."); System.exit(-1);}
 	}
  points = Arrays.copyOf(points,programs.size()); 
 for(;round<tests;round++) {
@@ -75,6 +76,9 @@ class ProgramScore implements Comparable<ProgramScore> {
 	scores[addIndex] = d;
 	addIndex++;
  }
+    boolean ready() {
+        return addIndex == ScoreCompare.tests;
+    }
 
     double cur() {
 	return scores[ScoreCompare.round];

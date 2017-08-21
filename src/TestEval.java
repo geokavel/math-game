@@ -20,7 +20,7 @@ public class TestEval {
 	Scanner exps = new Scanner(new File("outputs/"+args[0]));
 	File output = new File("scores/"+args[0]+".out");
 	PrintWriter out = new PrintWriter(output);
-        Eval me = new Eval(args.length == 2 && args[1].equals("deg"));
+        Eval me = new Eval(args[1].equals("deg"));
 	while(tests.hasNextLine() && exps.hasNextLine()) {
 	    testNo++;
 	    int[] testDigits = new int[5];
@@ -42,9 +42,10 @@ public class TestEval {
                     if((int)expDigits[d]-48 != testDigits[d]) throw new RuntimeException("Didn't use exactly 1 of each number");
                 }
                 result = me.eval(expression);
+            if(Double.isNaN(result) || Double.isInfinite(result)) throw new RuntimeException("Expression doesn't evaluate to real number.");
                 score = Math.abs(result - target);
 		totalScore += score;
-		out.println(score);
+		
 	    }
 	    catch(RuntimeException e) {
 		invalid++;
@@ -52,14 +53,12 @@ public class TestEval {
 		score = Double.POSITIVE_INFINITY;
 		System.err.printf("Error (Test #%d): %s %s=>%s | %s%n",testNo,digitString,target,expression,e.getMessage());
 	    }
-	    
+	    out.println(score);
 	    
 	}
         System.out.println("Tests Evaluated: " + testNo);
 	out.close();
-	if(invalid > 0) {
-	    output.delete();
-	}
+	
        
 	
     }
