@@ -34,7 +34,7 @@ public class TestEval {
 	    double result,score;
 	    try {
 		if(expression.contains(".")) throw new RuntimeException("Expression can't contain '.'");
-		char[] expDigits = expression.replaceAll("_\\d+","").replaceAll("\\D","").toCharArray();
+		char[] expDigits = expression.replaceAll("_\\d+\\(","").replaceAll("\\D","").toCharArray();
                 if(expDigits.length != testDigits.length) throw new RuntimeException("Didn't use exactly 1 of each number");
                 Arrays.sort(testDigits);
                 Arrays.sort(expDigits);
