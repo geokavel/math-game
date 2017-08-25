@@ -44,7 +44,7 @@ for(;round<tests;round++) {
 	 
 	 
      }
-
+    System.out.println(round+1+". ");
      for(int i = 0;i<programs.size();i++) {
 	 programs.get(i).gameScore += roundPoints[i];
 	 System.out.println(programs.get(i).name + ": " +  roundPoints[i]);
