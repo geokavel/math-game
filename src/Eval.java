@@ -72,12 +72,23 @@ public double eval(final String str) {
             } else if (ch >= 'a' && ch <= 'z') { // functions
                 while (ch >= 'a' && ch <= 'z') nextChar();
                 String func = str.substring(startPos, this.pos);
-                x = parseFactor();
+                int repeat = 1;
+                if(ch == '_') {
+                    nextChar();
+                    repeat = (int)parseFactor();
+                    x = parseFactor();
+                }
+                else {
+                      x = parseFactor();
+                }
+            
+                for(int i = 0;i<repeat;i++) {
                 if (func.equals("sqrt")) x = Math.sqrt(x);
                 else if (func.equals("sin")) x = Math.sin(toRadians(x));
                 else if (func.equals("cos")) x = Math.cos(toRadians(x));
                 else if (func.equals("tan")) x = Math.tan(toRadians(x));
                 else throw new RuntimeException("Unknown function: " + func);
+                }
             } else {
                 throw new RuntimeException("Unexpected: " + (char)ch);
             }
