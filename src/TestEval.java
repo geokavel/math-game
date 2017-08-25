@@ -18,7 +18,7 @@ public class TestEval {
 	int testNo = 0;
 	Scanner tests = new Scanner(new File("testFile.txt"));
 	Scanner exps = new Scanner(new File("outputs/"+args[0]));
-	File output = new File("scores/"+args[0]+".out");
+	File output = new File("scores/"+args[0]+".score");
 	PrintWriter out = new PrintWriter(output);
         Eval me = new Eval(args[1].equals("deg"));
 	while(tests.hasNextLine() && exps.hasNextLine()) {
